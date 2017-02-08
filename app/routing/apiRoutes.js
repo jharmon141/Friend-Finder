@@ -1,4 +1,4 @@
-var friendData = require('../data/friends.js');
+var friends = require('../data/friends.js');
 var path = require('path');
 
 
@@ -25,14 +25,14 @@ module.exports = function(app){
 
 
         res.json(chosenMatch);
-        friendData.push(req.body);
+        friends.push(req.body);
 
 
         app.post('/api/clear', function(req, res){
 
-            friendData = [];
+            friends = [];
 
-            console.log(friendData);
+            console.log(friends);
         });
     });
 };
