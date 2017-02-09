@@ -10,18 +10,19 @@ module.exports = function(app){
     });
 
 
-    app.post('/api/theList', function(req, res){
+    app.post('/api/friends', function(req, res){
         var lowestDifferenceInt = 50;
         var chosenMatch;
-        friendData.forEach(function(storedUserObject){
+        for (i=0; i<friends.length; i++) {
             var difference = 0;
-            for(i=0;i<storedUserObject.friendNumbers.length;i++){
-                difference+=Math.abs(storedUserObject.friendNumbers[i] - req.body.friendNumbers[i]);
+            for(j=0;j<friends[i].scores.length;j++){
+                var temp = parseInt(req.body.scores[j]);
+                difference+=Math.abs(friends[i].scores[j] - temp);
             } if(difference<lowestDifferenceInt){
                 lowestDifferenceInt = difference;
-                chosenMatch = storedUserObject;
+                chosenMatch = friends[i];
             }
-        });
+        }
 
 
         res.json(chosenMatch);
